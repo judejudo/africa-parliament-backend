@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publications",
+  "info": {
+    "singularName": "publication",
+    "pluralName": "publications",
+    "displayName": "Publication",
+    "description": "Academic publications from African parliament countries"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "publicationNumber": {
+      "type": "integer",
+      "required": true,
+      "unique": true,
+      "private": false,
+      "configurable": false,
+      "visible": false
+    },
+    "datePublished": {
+      "type": "date",
+      "required": true
+    },
+    "createdByUser": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "admin::user",
+      "private": false,
+      "configurable": false,
+      "visible": false
+    },
+    "pdfFile": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["files"]
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
