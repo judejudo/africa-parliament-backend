@@ -7,6 +7,11 @@ import { factories } from '@strapi/strapi'
 export default factories.createCoreController('api::publication.publication' as any, ({ strapi }) => ({
   // Override find method to handle email filtering
   async find(ctx) {
+    console.log('=== PUBLICATION FIND REQUEST ===');
+    console.log('Query params:', ctx.query);
+    console.log('User state:', ctx.state.user);
+    console.log('Request URL:', ctx.request.url);
+    
     // Check if frontend sent userEmail parameter
     if (ctx.query.userEmail) {
       const userEmail = ctx.query.userEmail;
@@ -72,6 +77,40 @@ export default factories.createCoreController('api::publication.publication' as 
         console.error('Error finding publications by email:', error);
         return { data: [], meta: { pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 } } };
       }
+    }
+    
+    // Admin panel filtering - check if admin user is logged in
+    const adminUserId = ctx.state.user?.id;
+    if (adminUserId) {
+      // Filter for admin panel requests
+      const allPubs = await super.find(ctx);
+      const publicationIds = (allPubs as any).data.map(p => p.id);
+      
+      if (publicationIds.length > 0) {
+        const dbResults = await strapi.db.connection.raw(
+          `SELECT id, created_by_id FROM publications WHERE id IN (${publicationIds.join(',')}) AND created_by_id = ?`,
+          [adminUserId]
+        );
+        
+        const userPublicationIds = dbResults.map(row => row.id);
+        const filteredPubs = (allPubs as any).data.filter(pub => 
+          userPublicationIds.includes(pub.id)
+        );
+        
+        return {
+          data: filteredPubs,
+          meta: {
+            pagination: {
+              page: 1,
+              pageSize: 10,
+              pageCount: Math.ceil(filteredPubs.length / 10),
+              total: filteredPubs.length
+            }
+          }
+        };
+      }
+      
+      return { data: [], meta: { pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 } } };
     }
     
     // Default behavior for other requests
