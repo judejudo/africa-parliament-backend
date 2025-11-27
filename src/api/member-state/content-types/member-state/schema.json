@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "member_states",
+  "info": {
+    "singularName": "member-state",
+    "pluralName": "member-states",
+    "displayName": "Member State",
+    "description": "African parliament member states with country name and flag"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "country": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 255
+    },
+    "flag": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+}

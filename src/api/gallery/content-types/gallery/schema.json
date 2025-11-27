@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "galleries",
+  "info": {
+    "singularName": "gallery",
+    "pluralName": "galleries",
+    "displayName": "Gallery",
+    "description": "Gallery with year, description, location, conference number, and images"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "year": {
+      "type": "integer",
+      "required": true,
+      "min": 1900,
+      "max": 2100
+    },
+    "description": {
+      "type": "text"
+    },
+    "location": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "conferenceNumber": {
+      "type": "integer",
+      "min": 1
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+}

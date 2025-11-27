@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "governing_councils",
+  "info": {
+    "singularName": "governing-council",
+    "pluralName": "governing-councils",
+    "displayName": "Governing Council",
+    "description": "Governing council members with name, image, post, and description"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "post": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
