@@ -4,4 +4,9 @@
 
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter('api::governing-council.governing-council');
+export default factories.createCoreRouter('api::governing-council.governing-council', {
+  config: {
+    find: { auth: false },
+    findOne: { auth: false },
+  }
+});
