@@ -25,14 +25,14 @@ services:
       - key: PORT
         value: 10000
       - key: APP_KEYS
-        generateValue: true
+        value: "key1-random-string-here,key2-another-random-string"
       - key: API_TOKEN_SALT
-        generateValue: true
+        value: "random-api-token-salt-32-chars"
       - key: ADMIN_JWT_SECRET
-        generateValue: true
+        value: "random-admin-jwt-secret-32-chars"
       - key: TRANSFER_TOKEN_SALT
-        generateValue: true
+        value: "random-transfer-token-salt-32-chars"
       - key: JWT_SECRET
-        generateValue: true
+        value: "random-jwt-secret-32-characters"
       - key: ENCRYPTION_KEY
-        generateValue: true
+        value: "random-encryption-key-32-characters"
