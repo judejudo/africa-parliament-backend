@@ -2,6 +2,7 @@ databases:
   - name: africa-parliament-db
     databaseName: africa_parliament
     user: africa_parliament_user
+    plan: free
 
 services:
   - type: web
