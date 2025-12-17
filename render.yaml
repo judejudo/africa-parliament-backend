@@ -1,0 +1,25 @@
+databases:
+  - name: africa-parliament-db
+    databaseName: africa_parliament
+    user: africa_parliament_user
+
+services:
+  - type: web
+    name: africa-parliament-backend
+    env: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_CLIENT
+        value: postgres
+      - key: DATABASE_URL
+        fromDatabase:
+          name: africa-parliament-db
+          property: connectionString
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
