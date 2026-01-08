@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "patrons",
+  "info": {
+    "singularName": "patron",
+    "pluralName": "patrons",
+    "displayName": "Patron"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": ["images"],
+      "type": "media",
+      "multiple": false
+    },
+    "tenure": {
+      "type": "string"
+    }
+  }
+}

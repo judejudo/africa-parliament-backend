@@ -722,6 +722,37 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPatronPatron extends Struct.CollectionTypeSchema {
+  collectionName: 'patrons';
+  info: {
+    displayName: 'Patron';
+    pluralName: 'patrons';
+    singularName: 'patron';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::patron.patron'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    tenure: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Struct.CollectionTypeSchema {
   collectionName: 'posts';
   info: {
@@ -1347,6 +1378,7 @@ declare module '@strapi/strapi' {
       'api::governing-council.governing-council': ApiGoverningCouncilGoverningCouncil;
       'api::member-state.member-state': ApiMemberStateMemberState;
       'api::partner.partner': ApiPartnerPartner;
+      'api::patron.patron': ApiPatronPatron;
       'api::post.post': ApiPostPost;
       'api::publication.publication': ApiPublicationPublication;
       'api::video.video': ApiVideoVideo;
