@@ -1,0 +1,1 @@
+export default {\n  routes: [\n    {\n      method: 'GET',\n      path: '/patrons/current',\n      handler: 'patron.findCurrent',\n    },\n  ],\n};
