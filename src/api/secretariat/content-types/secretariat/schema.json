@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "secretariats",
+  "info": {
+    "singularName": "secretariat",
+    "pluralName": "secretariats",
+    "displayName": "Secretariat"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "linkedInUrl": {
+      "type": "string"
+    },
+    "facebookUrl": {
+      "type": "string"
+    },
+    "xUrl": {
+      "type": "string"
+    }
+  }
+}
