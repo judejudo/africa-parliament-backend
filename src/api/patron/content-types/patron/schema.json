@@ -19,12 +19,17 @@
       "type": "text"
     },
     "image": {
-      "allowedTypes": ["images"],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "tenure": {
       "type": "string"
+    },
+    "linkedInUrl": {
+      "type": "text"
     }
   }
 }

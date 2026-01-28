@@ -797,6 +797,7 @@ export interface ApiPatronPatron extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images'>;
+    linkedInUrl: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
