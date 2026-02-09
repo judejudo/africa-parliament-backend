@@ -42,5 +42,70 @@ export default factories.createCoreController('api::publication.publication' as 
 
   async create(ctx) {
     return super.create(ctx);
+  },
+
+  async findByCountry(ctx) {
+    const { country } = ctx.params;
+    
+    try {
+      // Find admin user with username matching the country
+      const adminUser = await strapi.db.query('admin::user').findOne({
+        where: { username: country }
+      });
+      
+      if (!adminUser) {
+        return ctx.notFound(`No admin found for country: ${country}`);
+      }
+      
+      // Get publications created by this admin using direct database query
+      const publicationIds = await strapi.db.connection.raw(
+        `SELECT id FROM publications WHERE created_by_id = ? AND published_at IS NOT NULL ORDER BY publication_number DESC`,
+        [adminUser.id]
+      );
+      
+      const publications = [];
+      
+      // Fetch full publication data for each ID
+      for (const row of publicationIds) {
+        const pub = await strapi.entityService.findOne('api::publication.publication', row.id, {
+          populate: {
+            pdfFile: true,
+            country: true
+          }
+        });
+        if (pub) {
+          publications.push(pub);
+        }
+      }
+      
+      // Get member state info for the country
+      const memberState = await strapi.entityService.findMany('api::member-state.member-state', {
+        filters: {
+          country: country
+        },
+        populate: {
+          flag: true,
+          parliamentFlag: true
+        },
+        limit: 1
+      });
+      
+      return {
+        data: publications,
+        meta: {
+          country: country,
+          adminUser: {
+            id: adminUser.id,
+            username: adminUser.username,
+            name: `${adminUser.firstname || ''} ${adminUser.lastname || ''}`.trim()
+          },
+          memberState: memberState[0] || null,
+          total: publications.length
+        }
+      };
+    } catch (error) {
+      strapi.log.error('Error in findByCountry:', error);
+      return ctx.badRequest('Failed to fetch publications by country');
+    }
   }
 }));
