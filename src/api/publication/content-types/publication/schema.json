@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true,
-      "maxLength": 255
-    },
     "publicationNumber": {
       "type": "integer",
       "required": true,
@@ -24,10 +19,6 @@
       "private": false,
       "configurable": false,
       "visible": false
-    },
-    "datePublished": {
-      "type": "date",
-      "required": true
     },
     "createdByUser": {
       "type": "relation",
@@ -37,14 +28,31 @@
       "configurable": false,
       "visible": false
     },
+    "title": {
+      "type": "string",
+      "maxLength": 255,
+      "required": true
+    },
+    "datePublished": {
+      "type": "date",
+      "required": true
+    },
     "pdfFile": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["files"]
+      "allowedTypes": [
+        "files"
+      ]
     },
     "description": {
       "type": "text"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::member-state.member-state",
+      "inversedBy": "publication"
     }
   }
 }

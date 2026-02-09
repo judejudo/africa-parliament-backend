@@ -14,15 +14,33 @@
   "attributes": {
     "country": {
       "type": "string",
+      "maxLength": 255,
       "required": true,
-      "unique": true,
-      "maxLength": 255
+      "unique": true
     },
     "flag": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "publication": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::publication.publication",
+      "mappedBy": "country"
+    },
+    "parliamentFlag": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
