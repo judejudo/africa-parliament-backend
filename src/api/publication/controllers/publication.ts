@@ -48,9 +48,11 @@ export default factories.createCoreController('api::publication.publication' as 
     const { country } = ctx.params;
     
     try {
-      // Find admin user with username matching the country
+      // Find admin user with username matching the country (case-insensitive)
       const adminUser = await strapi.db.query('admin::user').findOne({
-        where: { username: country }
+        where: { 
+          username: { $eqi: country } 
+        }
       });
       
       if (!adminUser) {
