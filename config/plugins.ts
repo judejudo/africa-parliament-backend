@@ -1,9 +1,18 @@
 export default ({ env }) => ({
   upload: {
     config: {
-      provider: 'local',
+      provider: env('NODE_ENV') === 'production' ? 'cloudinary' : 'local',
       providerOptions: {
-        sizeLimit: 100000000,
+        ...(env('NODE_ENV') === 'production' 
+          ? {
+              cloud_name: env('CLOUDINARY_NAME'),
+              api_key: env('CLOUDINARY_KEY'),
+              api_secret: env('CLOUDINARY_SECRET'),
+            }
+          : {
+              sizeLimit: 100000000,
+            }
+        ),
       },
       responsiveDimensions: false,
     },
