@@ -56,7 +56,7 @@ export default factories.createCoreController('api::publication.publication' as 
       });
       
       if (!adminUser) {
-        return ctx.notFound(`No admin found for country: ${country}`);
+        return ctx.notFound(`No Admin and Publications found for country: ${country}`);
       }
       
       // Get publications created by this admin using direct database query

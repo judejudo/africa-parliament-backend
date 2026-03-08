@@ -4,7 +4,7 @@
   "info": {
     "singularName": "patron",
     "pluralName": "patrons",
-    "displayName": "Patron"
+    "displayName": "Patrons"
   },
   "options": {
     "draftAndPublish": true

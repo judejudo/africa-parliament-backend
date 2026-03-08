@@ -4,8 +4,8 @@
   "info": {
     "singularName": "conference",
     "pluralName": "conferences",
-    "displayName": "Conference",
-    "description": "Conferences with title, image attachment, file attachment, host institution, description, location, and date of occasion"
+    "displayName": "Conferences",
+    "description": "Conferences with title, image attachment, brochure, host institution, description, location, start date, end date, and communique"
   },
   "options": {
     "draftAndPublish": true
@@ -24,7 +24,7 @@
         "images"
       ]
     },
-    "fileAttachment": {
+    "brochure": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -48,7 +48,11 @@
       "type": "date",
       "required": true
     },
-    "comunique": {
+    "endDate": {
+      "type": "date",
+      "required": false
+    },
+    "communique": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [

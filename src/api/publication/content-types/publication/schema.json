@@ -4,7 +4,7 @@
   "info": {
     "singularName": "publication",
     "pluralName": "publications",
-    "displayName": "Publication",
+    "displayName": "Publications",
     "description": "Academic publications from African parliament countries"
   },
   "options": {
@@ -51,8 +51,7 @@
     "country": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::member-state.member-state",
-      "inversedBy": "publication"
+      "target": "api::member-state.member-state"
     }
   }
 }

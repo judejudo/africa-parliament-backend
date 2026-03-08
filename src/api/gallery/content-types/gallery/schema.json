@@ -4,7 +4,7 @@
   "info": {
     "singularName": "gallery",
     "pluralName": "galleries",
-    "displayName": "Gallery",
+    "displayName": "Galleries",
     "description": "Gallery with year, description, location, conference number, thumbnail, and images"
   },
   "options": {

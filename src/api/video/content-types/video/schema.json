@@ -4,7 +4,7 @@
   "info": {
     "singularName": "video",
     "pluralName": "videos",
-    "displayName": "Video",
+    "displayName": "Videos",
     "description": "Videos with description, thumbnail image, and YouTube link"
   },
   "options": {

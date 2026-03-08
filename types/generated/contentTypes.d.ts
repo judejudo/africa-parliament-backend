@@ -471,7 +471,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
     description: 'Articles with date of post, description, author, title, file attachment, and images';
-    displayName: 'Article';
+    displayName: 'Articles';
     pluralName: 'articles';
     singularName: 'article';
   };
@@ -512,7 +512,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiCharterCharter extends Struct.CollectionTypeSchema {
   collectionName: 'charters';
   info: {
-    displayName: 'Charter';
+    displayName: 'Charters';
     pluralName: 'charters';
     singularName: 'charter';
   };
@@ -540,8 +540,8 @@ export interface ApiCharterCharter extends Struct.CollectionTypeSchema {
 export interface ApiConferenceConference extends Struct.CollectionTypeSchema {
   collectionName: 'conferences';
   info: {
-    description: 'Conferences with title, image attachment, file attachment, host institution, description, location, and date of occasion';
-    displayName: 'Conference';
+    description: 'Conferences with title, image attachment, brochure, host institution, description, location, start date, end date, and communique';
+    displayName: 'Conferences';
     pluralName: 'conferences';
     singularName: 'conference';
   };
@@ -549,13 +549,16 @@ export interface ApiConferenceConference extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    comunique: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    brochure: Schema.Attribute.Media<'files'>;
+    communique: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     dateOfOccasion: Schema.Attribute.Date & Schema.Attribute.Required;
     description: Schema.Attribute.Text;
-    fileAttachment: Schema.Attribute.Media<'files'>;
+    endDate: Schema.Attribute.Date;
     hostInstitution: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -619,7 +622,7 @@ export interface ApiGalleryGallery extends Struct.CollectionTypeSchema {
   collectionName: 'galleries';
   info: {
     description: 'Gallery with year, description, location, conference number, thumbnail, and images';
-    displayName: 'Gallery';
+    displayName: 'Galleries';
     pluralName: 'galleries';
     singularName: 'gallery';
   };
@@ -670,7 +673,7 @@ export interface ApiGalleryGallery extends Struct.CollectionTypeSchema {
 export interface ApiLeadershipLeadership extends Struct.CollectionTypeSchema {
   collectionName: 'leaderships';
   info: {
-    displayName: 'Leadership';
+    displayName: 'Leaders';
     pluralName: 'leaderships';
     singularName: 'leadership';
   };
@@ -705,7 +708,7 @@ export interface ApiMemberStateMemberState extends Struct.CollectionTypeSchema {
   collectionName: 'member_states';
   info: {
     description: 'African parliament member states with country name and flag';
-    displayName: 'Member State';
+    displayName: 'Member States';
     pluralName: 'member-states';
     singularName: 'member-state';
   };
@@ -732,10 +735,6 @@ export interface ApiMemberStateMemberState extends Struct.CollectionTypeSchema {
     parliamentFlag: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    publication: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::publication.publication'
-    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -747,7 +746,7 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   collectionName: 'partners';
   info: {
     description: 'Partner organizations with name and logo';
-    displayName: 'Partner';
+    displayName: 'Partners';
     pluralName: 'partners';
     singularName: 'partner';
   };
@@ -780,7 +779,7 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
 export interface ApiPatronPatron extends Struct.CollectionTypeSchema {
   collectionName: 'patrons';
   info: {
-    displayName: 'Patron';
+    displayName: 'Patrons';
     pluralName: 'patrons';
     singularName: 'patron';
   };
@@ -813,7 +812,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
   collectionName: 'posts';
   info: {
     description: 'Posts with date of post, description, author, title, file attachment, and images';
-    displayName: 'Post';
+    displayName: 'Posts';
     pluralName: 'posts';
     singularName: 'post';
   };
@@ -852,7 +851,7 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
   collectionName: 'publications';
   info: {
     description: 'Academic publications from African parliament countries';
-    displayName: 'Publication';
+    displayName: 'Publications';
     pluralName: 'publications';
     singularName: 'publication';
   };
@@ -895,7 +894,7 @@ export interface ApiPublicationPublication extends Struct.CollectionTypeSchema {
 export interface ApiSecretariatSecretariat extends Struct.CollectionTypeSchema {
   collectionName: 'secretariats';
   info: {
-    displayName: 'Secretariat';
+    displayName: 'Secretariats';
     pluralName: 'secretariats';
     singularName: 'secretariat';
   };
@@ -969,7 +968,7 @@ export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
   collectionName: 'videos';
   info: {
     description: 'Videos with description, thumbnail image, and YouTube link';
-    displayName: 'Video';
+    displayName: 'Videos';
     pluralName: 'videos';
     singularName: 'video';
   };

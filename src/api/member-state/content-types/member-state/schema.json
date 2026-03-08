@@ -4,7 +4,7 @@
   "info": {
     "singularName": "member-state",
     "pluralName": "member-states",
-    "displayName": "Member State",
+    "displayName": "Member States",
     "description": "African parliament member states with country name and flag"
   },
   "options": {
@@ -25,12 +25,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "publication": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::publication.publication",
-      "mappedBy": "country"
     },
     "parliamentFlag": {
       "type": "media",
