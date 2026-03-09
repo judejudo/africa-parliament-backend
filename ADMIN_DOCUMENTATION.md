@@ -28,7 +28,6 @@
 ### Password Management
 - Use strong passwords with at least 12 characters
 - Include uppercase, lowercase, numbers, and special characters
-- Change passwords regularly for security
 
 ---
 
@@ -118,21 +117,30 @@ The system manages 14 different content types, organized as follows:
 3. Click "Create new user"
 
 **Step 2: User Information**
-1. **Username**: Enter the country name in lowercase (e.g., "uganda", "kenya", "ghana")
-2. **Email**: Use the format `[country]@an-pbo.org` (e.g., `uganda@an-pbo.org`)
-3. **First Name**: Country name (e.g., "Uganda")
-4. **Last Name**: "Admin"
-5. **Password**: Generate a strong password and share securely
+1. **Email**: Use the format `[country]@an-pbo.org` (e.g., `uganda@an-pbo.org`)
+2. **First Name**: Country name (e.g., "Uganda")
+3. **Last Name**: "Admin"
+4. **Role**: Select "Editor"
+5. Click "Save" to create the user
 
-**Step 3: Role Assignment**
-1. **Role**: Select "Country Administrator" (if custom role created) or "Editor"
-2. **Permissions**: Ensure they have:
+**Step 3: Copy Registration Link**
+1. After saving, Strapi will display a registration link in a popup window
+2. **Important**: Copy this link immediately as it will only be shown once
+3. Send this link securely to the new country administrator
+4. The country admin will use this link to set up their own password
+
+**Step 4: Edit User to Add Username**
+1. Go back to "Settings" → "Administration Panel" → "Users"
+2. Find the newly created user and click "Edit"
+3. **Username**: Enter the country name in lowercase (e.g., "uganda", "kenya", "ghana")
+4. **Permissions**: Ensure they have:
    - Read access to Member States (to select their country)
    - Full CRUD access to Publications
    - Read-only access to other content types (optional)
+5. Click "Save"
 
-**Step 4: Country-Specific Configuration**
-1. After creation, the country admin will only see publications related to their country
+**Step 5: Country-Specific Configuration**
+1. After the country admin sets up their password, they will only see publications related to their country
 2. When creating publications, they must select their country from the Member States dropdown
 3. The system automatically filters content based on their assigned country
 

@@ -6,25 +6,6 @@ import { factories } from '@strapi/strapi'
 
 export default factories.createCoreController('api::publication.publication' as any, ({ strapi }) => ({
   async find(ctx) {
-    console.log('Query before:', ctx.query);
-    
-    // Check database directly
-    const dbPubs = await strapi.db.query('api::publication.publication').findMany({
-      select: ['id', 'title'],
-      populate: { country: { select: ['id', 'country'] } }
-    });
-    console.log('Direct DB query:', dbPubs);
-    
-    // Check if country column exists in publications table
-    const tableInfo = await strapi.db.connection.raw("PRAGMA table_info(publications)");
-    console.log('Publications table columns:', tableInfo.map(col => col.name));
-    
-    // Fetch member states for debugging
-    const memberStates = await strapi.entityService.findMany('api::member-state.member-state', {
-      fields: ['id', 'country']
-    });
-    console.log('Available member states:', memberStates);
-    
     // Override with safe population and include drafts
     ctx.query.populate = {
       pdfFile: true,
@@ -35,7 +16,6 @@ export default factories.createCoreController('api::publication.publication' as 
     ctx.query.publicationState = 'preview';
     
     const result = await super.find(ctx);
-    console.log('Country data check:', result.data?.map(p => ({ id: p.id, country: p.country })));
     
     return result;
   },
@@ -59,26 +39,17 @@ export default factories.createCoreController('api::publication.publication' as 
         return ctx.notFound(`No Admin and Publications found for country: ${country}`);
       }
       
-      // Get publications created by this admin using direct database query
-      const publicationIds = await strapi.db.connection.raw(
-        `SELECT id FROM publications WHERE created_by_id = ? AND published_at IS NOT NULL ORDER BY publication_number DESC`,
-        [adminUser.id]
-      );
-      
-      const publications = [];
-      
-      // Fetch full publication data for each ID
-      for (const row of publicationIds) {
-        const pub = await strapi.entityService.findOne('api::publication.publication', row.id, {
-          populate: {
-            pdfFile: true,
-            country: true
-          }
-        });
-        if (pub) {
-          publications.push(pub);
-        }
-      }
+      // Get publications created by this admin using Strapi query builder
+      const publications = await strapi.entityService.findMany('api::publication.publication', {
+        filters: {
+          createdByUser: adminUser.id,
+        },
+        populate: {
+          pdfFile: true,
+          country: true
+        },
+        sort: { publicationNumber: 'desc' }
+      });
       
       // Get member state info for the country
       const memberState = await strapi.entityService.findMany('api::member-state.member-state', {
