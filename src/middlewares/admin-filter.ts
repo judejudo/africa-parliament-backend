@@ -19,7 +19,7 @@ export default (config, { strapi }) => {
             [adminUserId]
           );
           
-          const userPublicationIds = dbResults.map(row => row.id);
+          const userPublicationIds = dbResults.rows.map(row => row.id);
           
           // Filter results to only include user's publications
           ctx.body.results = ctx.body.results.filter(pub => 
