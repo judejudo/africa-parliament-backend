@@ -42,11 +42,12 @@ export default factories.createCoreController('api::publication.publication' as 
       // Get publications created by this admin using Strapi query builder
       const publications = await strapi.entityService.findMany('api::publication.publication', {
         filters: {
-          createdByUser: adminUser.id,
+          createdBy: adminUser.id,
         },
         populate: {
           pdfFile: true,
-          country: true
+          country: true,
+          createdBy: true
         },
         sort: { publicationNumber: 'desc' }
       });
